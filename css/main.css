@@ -218,6 +218,16 @@ a.navbar-brand{
     padding-top: 50px;
     padding-bottom: 150px;
 }
+
+.background-cardapio{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 500px;
+    background-image: url(../img/bg-icons-1.png);
+
+}
+
 .container-menu{
     margin-bottom: 40px;
 }
