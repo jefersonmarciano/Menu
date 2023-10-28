@@ -119,7 +119,7 @@ cardapio.metodos = {
 
                 }
 
-                alert('Item adicionado no carrinho')
+                cardapio.metodos.mensagem("Item adicionado ao carrinho!", 'green')
                 // reseta para zero depois de adicionar no carrinho
                 $("#qntd-" + id).text(0)  
                 
@@ -149,6 +149,23 @@ cardapio.metodos = {
         }
 
         $(".badge-total-carrinho").html(total)
+
+    },
+
+    mensagem: (texto, cor= 'red', tempo = 1500) => {        
+        // pego um numero aleatorio e multiplico pela data atual
+        let id = Math.floor(Date.now() * Math.random()).toString();
+
+        let msg = `<div id="msg-${id}" class="animated fadeInDown toast ${cor}">${texto}</div>`;
+
+        $("#container-mensagens").append(msg);
+
+        setTimeout(() => {
+            $("#msg-" + id).removeClass('fadeInDown')
+            $("#msg-" + id).addClass('fadeOutUp')
+            $("#msg-" + id).remove();
+
+        }, tempo)
 
     }
 
