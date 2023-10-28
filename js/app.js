@@ -130,6 +130,7 @@ cardapio.metodos = {
         }
 
     },
+
     // atualiza o badge de totais dos botoes "meu cariinho"
     atualizarBadgeTotal: () => {
 
@@ -152,7 +153,96 @@ cardapio.metodos = {
 
     },
 
-    mensagem: (texto, cor= 'red', tempo = 1500) => {        
+    // abrir modal de carrinho
+    abrirCarrinho: (abrir) =>{
+
+        if (abrir) {
+            $("#modalCarrinho").removeClass('hidden');
+            cardapio.metodos.carregarEtapa.apply(1)
+        }else{
+            $("#modalCarrinho").addClass('hidden');
+        }
+
+    },
+
+    // altera os textos e exibe os botoes das etapas
+    carregarEtapa: (etapa) => {
+
+        if (etapa == 1) {
+            $("#lblTituloEtapa").text('Seu carrinho');
+            $("#itensCarrinho").removeClass('hidden'); 
+            $("#localEntrega").addClass('hidden')
+            $("#resumoCarrinho").addClass('hidden')
+
+            $(".etapa").removeClass('active');
+            $(".etapa1").addClass('active');
+
+            $("#btnEtapaPedido").removeClass('hidden')
+            $("#btnEtapaEndereco").addClass('hidden')
+            $("#btnEtapaResumo").addClass('hidden')
+            $("#btnVoltar").addClass('hidden')
+
+        }
+        if (etapa == 2) {
+            $("#lblTituloEtapa").text('Endereço ed entrega:');
+            $("#itensCarrinho").addClass('hidden'); 
+            $("#localEntrega").removeClass('hidden')
+            $("#resumoCarrinho").addClass('hidden')
+
+            $(".etapa").removeClass('active');
+            $(".etapa1").addClass('active');
+            $(".etapa2").addClass('active');
+
+            $("#btnEtapaPedido").addClass('hidden')
+            $("#btnEtapaEndereco").removeClass('hidden')
+            $("#btnEtapaResumo").addClass('hidden')
+            $("#btnVoltar").removeClass('hidden')
+
+        }
+        if (etapa == 3) {
+            $("#lblTituloEtapa").text('Resumo do pedido:');
+            $("#itensCarrinho").addClass('hidden'); 
+            $("#localEntrega").addClass('hidden')
+            $("#resumoCarrinho").removeClass('hidden')
+
+            $(".etapa").removeClass('active');
+            $(".etapa1").addClass('active');
+            $(".etapa2").addClass('active');
+            $(".etapa3").addClass('active');
+
+            $("#btnEtapaPedido").addClass('hidden')
+            $("#btnEtapaEndereco").addClass('hidden')
+            $("#btnEtapaResumo").removeClass('hidden')
+            $("#btnVoltar").removeClass('hidden')
+            
+        }
+
+    },
+
+    // botao de voltar etapas
+    voltarEtapa: () => {
+
+        let etapa = $(".etapa.active").length;
+        cardapio.metodos.carregarEtapa(etapa - 1);
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // mensagem
+        mensagem: (texto, cor= 'red', tempo = 2500) => {        
         // pego um numero aleatorio e multiplico pela data atual
         let id = Math.floor(Date.now() * Math.random()).toString();
 
@@ -163,7 +253,10 @@ cardapio.metodos = {
         setTimeout(() => {
             $("#msg-" + id).removeClass('fadeInDown')
             $("#msg-" + id).addClass('fadeOutUp')
-            $("#msg-" + id).remove();
+
+            setTimeout(() => {
+                $("#msg-" + id).remove();
+            }, 800);
 
         }, tempo)
 
