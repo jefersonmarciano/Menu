@@ -6,6 +6,7 @@ let cardapio = {};
 let MEU_CARRINHO = [];
 let VALOR_CARRINHO = 0;
 let VALOR_ENTREGA = 5;
+let MEU_ENDERECO = null;
 
 cardapio.eventos = {
     init: () => {
@@ -394,6 +395,63 @@ cardapio.metodos = {
             cardapio.metodos.mensagem('Infome o CEP, por favor.')
             $("#txtCEP").focus();
         }
+
+    },
+
+    // validação antes de prosseguir para etapa 3
+    resumoPedido: () =>{
+
+        let cep =  $("#txtCEP").val().trim();
+        let endereco =  $("#txtEndereco").val().trim();
+        let bairro =  $("#txtBairro").val().trim();
+        let cidade =  $("#txtCidade").val().trim();
+        let uf =  $("#ddlUF").val().trim();
+        let numero =  $("#txtNumero").val().trim();
+        let complemento =  $("#txtComplemento").val().trim();
+
+        if (cep.length <= 0) {
+            cardapio.metodos.mensagem('Informe o cep por favor.')
+            $("#txtCEP").focus()
+            return;
+        } 
+        if (endereco.length <= 0) {
+            cardapio.metodos.mensagem('Informe o endereço por favor.')
+            $("#txtEndereco").focus()
+            return;
+        }
+        if (bairro.length <= 0) {
+            cardapio.metodos.mensagem('Informe o bairro por favor.')
+            $("#txtBairro").focus()
+            return;
+        }
+        if (cidade.length <= 0) {
+            cardapio.metodos.mensagem('Informe a cidade por favor.')
+            $("#txtCidade").focus()
+            return;
+        }
+        if (uf == -1) {
+            cardapio.metodos.mensagem('Informe a UF por favor.')
+            $("#ddlUF").focus()
+            return;
+        }
+        if (numero.length <= 0) {
+            cardapio.metodos.mensagem('Informe o Número por favor.')
+            $("#txtNumero").focus()
+            return;
+        }
+
+        MEU_ENDERECO = {
+            cep: cep,
+            endereco: endereco,
+            cidade: cidade,
+            uf: uf,
+            numero: numero,
+            complemento: complemento
+
+        }
+
+        cardapio.metodos.carregarEtapa(3);
+
 
     },
 
