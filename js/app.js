@@ -451,11 +451,31 @@ cardapio.metodos = {
         }
 
         cardapio.metodos.carregarEtapa(3);
-
+        cardapio.metodos.carregarResumo()
 
     },
 
+    // carrega a etapa de resumo do pedido
+    carregarResumo: ( )=>{
+        $("#listaItensResumo").html('');
 
+        $.each(MEU_CARRINHO, (i, e) =>{
+
+            let temp = cardapio.templates.itemResumo.replace(/\${img}/g, e.img)
+                .replace(/\${nome}/g, e.name)
+                .replace(/\${preco}/g, e.price.toFixed(2).replace('.',','))                
+                .replace(/\${qntd}/g, e.qntd)
+                
+                $("#listaItensResumo").append(temp)
+
+        })
+
+        $("#resumoEndereco").html(`${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`)
+
+        $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`);
+
+
+    },
 
 
 
@@ -502,21 +522,26 @@ cardapio.templates = {
     item:`
                 <div class="col-3 mb-5">
                     <div class="card card-item" id="produto-\${id}">
+
                         <div class="img-produto">
                             <img src="\${img}">
                         </div>
+
                         <p class="title-produto text-center mt-4">
                             <b>\${nome}</b>
                         </p>
+
                         <p class="price-produto text-center">
                             <b>R$ \${preco}</b>
                         </p>
+
                         <div class="add-carrinho">
                             <span class="btn-menos" onclick="cardapio.metodos.diminuirQuantidade('\${id}')"><i class="fas fa-minus"></i></span>
                             <span class="add-numero-itens" id="qntd-\${id}">0</span>
                             <span class="btn-mais" onclick="cardapio.metodos.aumentarQuantidade('\${id}')"><i class="fas fa-plus"></i></span>
                             <span class="btn btn-add" onclick="cardapio.metodos.adicionarAoCarrinho('\${id}')"><i class="fa fa-shopping-bag"></i></span>
                         </div>
+
                     </div>
                 </div>
 
@@ -524,13 +549,16 @@ cardapio.templates = {
 
     itemCarrinho:`
                 <div class="col-12 item-carrinho">
+
                         <div class="img-produto">
                             <img src="\${img}" >
                         </div>
+
                         <div class="dados-produto">
                             <p class="title-produto"><b>\${nome}</b></p>
                             <p class="price-produto"><b>R$ \${preco}</b></p>
                         </div>
+
                         <div class="add-carrinho">
                             <span class="btn-menos" onclick="cardapio.metodos.diminuirQuantidadeCarrinho('\${id}')"><i class="fas fa-minus"></i></span>
                             <span class="add-numero-itens" id="qntd-carrinho-\${id}">\${qntd}</span>
@@ -540,7 +568,32 @@ cardapio.templates = {
 
                 </div>    
 
-`
+    
+    `,
+    itemResumo:`
+                <div class="col-12 item-carrinho resumo">
+                                <div class="img-produto-resumo">
+                                    <img src="\${img}">
+                                </div>
+
+                                <div class="dados-produto">
+                                    <p class="title-produto-resumo">
+                                        <b>\${nome}</b>
+                                    </p>
+                                    <p class="price-produto-resumo">
+                                        <b>R$ \${preco}</b>
+                                    </p>
+                                </div>
+
+                                <p class="quantidade-produto-resumo">
+                                    x <b>\${qntd}</b>
+                                </p>
+
+                    </div>
+    
+    
+    `
+
 
 
 
