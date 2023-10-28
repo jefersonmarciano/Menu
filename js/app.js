@@ -4,6 +4,8 @@ $(document).ready(function(){
 
 let cardapio = {};
 let MEU_CARRINHO = [];
+let VALOR_CARRINHO = 0;
+let VALOR_ENTREGA = 5;
 
 cardapio.eventos = {
     init: () => {
@@ -246,13 +248,18 @@ cardapio.metodos = {
 
                 $("#itensCarrinho").append(temp);
 
+                // ultimo item
+                if ((i + 1) == MEU_CARRINHO.length) {
+                    cardapio.metodos.carregarValores();
+                }
+
             })
             
         }
         else{
 
             $("#itensCarrinho").html('<p class="carrinho-vazio"><i class="fa fa-shopping-bag"></i>Seu carrinho está vazio</p>');
-
+            cardapio.metodos.carregarValores();
         }
 
     },
@@ -301,7 +308,104 @@ cardapio.metodos = {
         // atualiza o botao carrinho com a quantidade atualizada
         cardapio.metodos.atualizarBadgeTotal()
 
+        // atualiza os valores em reais do carrinho
+        cardapio.metodos.carregarValores();
+
     },
+
+
+    // carrega todos os valores de SubTotal e Total
+    carregarValores: () => {
+
+        VALOR_CARRINHO = 0;
+
+        $("#lblSubtotal").text('R$ 0,00')
+        $("#lblValorEntrega").text('+ R$ 0,00')
+        $("#lblValorTotal").text('R$ 0,00')
+
+        $.each(MEU_CARRINHO, (i, e) => {
+
+            VALOR_CARRINHO += parseFloat(e.price * e.qntd);
+
+            if ((i + 1) == MEU_CARRINHO.length) {
+
+                $("#lblSubtotal").text(`R$ ${VALOR_CARRINHO.toFixed(2).replace('.',',')}`)
+                $("#lblValorEntrega").text(`+ ${VALOR_ENTREGA.toFixed(2).replace('.',',')}`)
+                $("#lblValorTotal").text(`R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.',',')}`)
+                
+            }
+        })
+
+
+    },
+
+    // carregar a etapa endereço endereço
+    carregarEndereco: () => {
+
+        if (MEU_CARRINHO.length <= 0) {
+            cardapio.metodos.mensagem('Seu carrinho está vazio')
+            return;
+        }
+
+        cardapio.metodos.carregarEtapa(2);
+
+    },
+
+    // api ViaCEP
+    buscarCep: () => {
+        // cria a variavel com o valor do cep
+        let cep = $("#txtCEP").val().trim().replace(/\D/g, '');
+
+
+        //verifica se o cep tem valor informado
+        if (cep != "") {
+            // expreção regular para validar cep
+            let validacep = /^[0-9]{8}$/;
+
+            if (validacep.test(cep)) {
+
+                $.getJSON("https://viacep.com.br/ws/"+ cep + "/json/?callback=?", function(dados){
+
+                if (!("erro" in dados)) {
+
+                    // Atualizar os campos com os valores retornados
+                    $("#txtEndereco").val(dados.logradouro);
+                    $("#txtBairro").val(dados.bairro);                    
+                    $("#txtCidade").val(dados.localidade);                    
+                    $("#ddlUF").val(dados.uf);
+                    $("#txtNumero").focus();
+
+
+                } else {
+                    cardapio.metodos.mensagem('CEP não encontrado. Preencha as informações manualmente.')
+                    $("#txtEndereco").focus();
+                }
+
+                })
+                
+            }
+            else{
+                cardapio.metodos.mensagem('Formato do CEP inválido')
+                $("#txtCEP").focus();
+            }
+
+        }
+        else{
+            cardapio.metodos.mensagem('Infome o CEP, por favor.')
+            $("#txtCEP").focus();
+        }
+
+    },
+
+
+
+
+
+
+
+
+
+
 
 
 
