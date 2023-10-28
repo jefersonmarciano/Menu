@@ -3,12 +3,13 @@ $(document).ready(function(){
 })
 
 let cardapio = {};
+let MEU_CARRINHO = [];
 
 cardapio.eventos = {
     init: () => {
         cardapio.metodos.obeterItensCardapio();
     }
-} 
+};
 
 cardapio.metodos = {
 
@@ -81,8 +82,75 @@ cardapio.metodos = {
         let qntdAtual = parseInt($("#qntd-" + id).text());
         $("#qntd-" + id).text(qntdAtual + 1)
 
+    },
+    // adicionar ao carrinho o item do cardapio
+    adicionarAoCarrinho: (id) =>{
+
+        let qntdAtual = parseInt($("#qntd-" + id).text());
+
+        if (qntdAtual > 0) {
+            
+            // obter a categoria ativa
+            let categoria = $(".container-menu a.active").attr('id').split('menu-')[1];
+
+            // obtenha a lista de itens
+            let filtro = MENU[categoria];
+
+            // obtem o item
+            let item = $.grep(filtro, (e, i) => { return e.id == id })
+
+            if (item.length > 0) {
+
+                // validar se existe o mesmo item no carrinho
+                let existe = $.grep(MEU_CARRINHO, (elem, index) => { return elem.id == id })
+
+
+                // caso ja exista o item so alterar a quantidade
+                if (existe.length > 0) {
+                    let objIndex = MEU_CARRINHO.findIndex((obj => obj.id == id))
+                    MEU_CARRINHO[objIndex].qntd = MEU_CARRINHO[objIndex].qntd + qntdAtual;
+                    
+                }
+                // se nao existe o item do carrinho, adiciona ele
+                else {
+
+                    item[0].qntd = qntdAtual;
+                    MEU_CARRINHO.push(item[0])
+
+                }
+
+                alert('Item adicionado no carrinho')
+                // reseta para zero depois de adicionar no carrinho
+                $("#qntd-" + id).text(0)  
+                
+                cardapio.metodos.atualizarBadgeTotal();
+                
+            }
+
+        }
+
+    },
+    // atualiza o badge de totais dos botoes "meu cariinho"
+    atualizarBadgeTotal: () => {
+
+        var total = 0;
+
+        $.each(MEU_CARRINHO, (i, e) => {
+            total += e.qntd
+        })
+
+        if (total > 0) {
+            $(".botao-carrinho").removeClass('hidden'); 
+            $(".container-total-carrinho").removeClass('hidden')
+        }
+        else{
+            $(".botao-carrinho").addClass('hidden')
+            $(".container-total-carrinho").addClass('hidden')
+        }
+
+        $(".badge-total-carrinho").html(total)
+
     }
-    
 
 
 }
@@ -105,7 +173,7 @@ cardapio.templates = {
                             <span class="btn-menos" onclick="cardapio.metodos.diminuirQuantidade('\${id}')"><i class="fas fa-minus"></i></span>
                             <span class="add-numero-itens" id="qntd-\${id}">0</span>
                             <span class="btn-mais" onclick="cardapio.metodos.aumentarQuantidade('\${id}')"><i class="fas fa-plus"></i></span>
-                            <span class="btn btn-add"><i class="fa fa-shopping-bag"></i></span>
+                            <span class="btn btn-add" onclick="cardapio.metodos.adicionarAoCarrinho('\${id}')"><i class="fa fa-shopping-bag"></i></span>
                         </div>
                     </div>
                 </div>
