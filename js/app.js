@@ -443,6 +443,7 @@ cardapio.metodos = {
         MEU_ENDERECO = {
             cep: cep,
             endereco: endereco,
+            bairro: bairro,
             cidade: cidade,
             uf: uf,
             numero: numero,
@@ -470,9 +471,9 @@ cardapio.metodos = {
 
         })
 
-        $("#resumoEndereco").html(`${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`)
+        $("#resumoEndereco").html(`${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro} ${MEU_ENDERECO.complemento}`)
 
-        $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`);
+        $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep}`);
 
 
     },
