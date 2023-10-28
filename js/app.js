@@ -8,6 +8,8 @@ let VALOR_CARRINHO = 0;
 let VALOR_ENTREGA = 5;
 let MEU_ENDERECO = null;
 
+let CELULAR_EMPRESA = '5514991632269';
+
 cardapio.eventos = {
     init: () => {
         cardapio.metodos.obeterItensCardapio();
@@ -475,18 +477,57 @@ cardapio.metodos = {
 
         $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep}`);
 
+        cardapio.metodos.finalizarPedido();
+
+        
+
+    },
+
+    // atualiza o link do botao do WhatsApp
+    finalizarPedido: () => {
+
+        if (MEU_CARRINHO.length > 0 && MEU_ENDERECO != null) {
+            
+            let texto = "Olá, gostaria de fazer um pedido:";
+            texto += `\n*Intens do pedido:*\n\n\${itens}`;
+            texto += `\n*Endereço de entrega:*`;
+            texto += `\n${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`
+            texto += `\n${MEU_ENDERECO.cidade}- ${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`
+            texto += `\n\n*Total (com entrega): R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.',',')}*`
+
+            let itens = '';
+
+            $.each(MEU_CARRINHO, (i, e) => {
+
+                itens += `*${e.qntd}x* ${e.name}....... R$ ${e.price.toFixed(2).replace('.',',')} \n`;
+
+
+                // ultimo item
+                if ((i +1 ) == MEU_CARRINHO.length) {
+
+                    texto = texto.replace(/\${itens}/g, itens);
+
+                    console.log(texto)
+
+                    // converter a URL
+                    let encode = encodeURI(texto)
+                    let URL = `https://wa.me/${CELULAR_EMPRESA}?text=${encode}`
+
+                    $("#btnEtapaResumo").attr('href', URL);
+                    
+                }
+
+                
+
+            })
+
+        }
+
 
     },
 
 
-
-
-
-
-
-
-
-
+    
 
 
 
