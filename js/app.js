@@ -184,7 +184,7 @@ cardapio.metodos = {
 
         }
         if (etapa == 2) {
-            $("#lblTituloEtapa").text('Endereço ed entrega:');
+            $("#lblTituloEtapa").text('Endereço de entrega:');
             $("#itensCarrinho").addClass('hidden'); 
             $("#localEntrega").removeClass('hidden')
             $("#resumoCarrinho").addClass('hidden')
@@ -251,19 +251,55 @@ cardapio.metodos = {
         }
         else{
 
+            $("#itensCarrinho").html('<p class="carrinho-vazio"><i class="fa fa-shopping-bag"></i>Seu carrinho está vazio</p>');
+
+        }
+
+    },
+    // diminuir quantidade do item do carrinho
+    diminuirQuantidadeCarrinho: (id) => {
+
+        let qntdAtual = parseInt($("#qntd-carrinho-" + id).text());
+
+        if (qntdAtual > 1) {
+            $("#qntd-carrinho-" + id).text(qntdAtual - 1);
+            cardapio.metodos.atualizarCarrinho(id, qntdAtual - 1)
+        }
+        else {
+            cardapio.metodos.removerItemCarrinho(id)
         }
 
     },
 
-    diminuirQuantidadeCarrinho: (id) => {
-
-
-    },
+    // aumentar quantidade do item do carrinho
     aumentarQuantidadeCarrinho: (id) => {
 
+        let qntdAtual = parseInt($("#qntd-carrinho-" + id).text());
+        $("#qntd-carrinho-" + id).text(qntdAtual + 1);
+        cardapio.metodos.atualizarCarrinho(id, qntdAtual + 1)
+
 
     },
+
+    // Botao remover item do carrinho
     removerItemCarrinho: (id) => {
+
+        MEU_CARRINHO = $.grep(MEU_CARRINHO, (e, i) => { return e.id != id})
+        cardapio.metodos.carregarCarrinho(id)
+
+        // atualiza o botao carrinho com a quantidade atualizada
+        cardapio.metodos.atualizarBadgeTotal()
+
+    },
+
+    //a atualiza o carrinho com a quantidade atual
+    atualizarCarrinho: (id, qntd) => {
+
+        let objIndex = MEU_CARRINHO.findIndex((obj => obj.id == id))
+        MEU_CARRINHO[objIndex].qntd = qntd;
+
+        // atualiza o botao carrinho com a quantidade atualizada
+        cardapio.metodos.atualizarBadgeTotal()
 
     },
 
