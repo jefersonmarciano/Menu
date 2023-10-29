@@ -1,4 +1,4 @@
-# Weather Duo 💦
+# Menu Online com WhatsApp :page_with_curl:
 
 ### Índice
 <ul>
