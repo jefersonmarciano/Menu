@@ -19,11 +19,7 @@ Modo Desktop 💻
 
 ![image](https://github.com/jefersonmarciano/Menu/assets/44215511/d376b1b7-4323-4941-8f5d-60ed0109bddb)
 
-
-
-<video src="https://github.com/jefersonmarciano/Menu/assets/44215511/52e58197-55e2-4b9a-a317-0ab91d70834f" width="700"></video>
-
-
+![2023-10-29 00-37-03](https://github.com/jefersonmarciano/Menu/assets/44215511/648bdd4e-7ac7-4203-92dd-bfd2df5b4419)
 
 
 <hr>
@@ -53,9 +49,9 @@ Modo Mobile 📲
 
 ## Parte 2 - Funcionalidade ⚙
 
-Funcionalidade via React.js e Toastfy para validação do campo. Utilizando conceitos como React Hooks, Componentes, Renderização Condicional, Desestruturação, Arrow Function, Function Expression e Condicionais. 
+Funcionalidade via JavaScript para validação e otimização. Utilizando conceitos como Componentes, Renderização Condicional, Desestruturação, Arrow Function, Function Expression e Condicionais. 
 
-![weatherDuoNEW](https://github.com/DevsTechBR/weatherDuo/assets/115199808/5682c0a0-7edf-48db-aa29-1335b24f092f)
+
 
 <hr>
 
