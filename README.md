@@ -31,7 +31,8 @@ https://github.com/jefersonmarciano/Menu/assets/44215511/52e58197-55e2-4b9a-a317
 
 Modo Mobile 📲
 
-![mobile](https://github.com/DevsTechBR/weatherDuo/assets/115199808/6e124831-5d8b-4625-be78-8cbbcd61f754)
+![ezgif-1-9a71e4c178](https://github.com/jefersonmarciano/Menu/assets/44215511/5627b047-51f1-4c90-8893-0f4c7ab13c6d)
+
 
 <hr>
 
