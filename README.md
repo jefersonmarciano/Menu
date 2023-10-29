@@ -49,7 +49,7 @@ Modo Mobile 📲
 
 ## Parte 2 - Funcionalidade ⚙
 
-Funcionalidade via JavaScript para validação e otimização. Utilizando conceitos como Componentes, Renderização Condicional, Desestruturação, Arrow Function, Function Expression e Condicionais. 
+Funcionalidade via JavaScript para validação, otimização e envios. Utilizando conceitos como Componentes, Renderização Condicional, Desestruturação, Arrow Function, Function Expression e Condicionais. 
 
 ![motrando](https://github.com/jefersonmarciano/Menu/assets/44215511/576178eb-5464-4083-848b-7cd437fc173c)
 
