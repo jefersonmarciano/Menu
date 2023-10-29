@@ -6,7 +6,6 @@
   <a href="#interfaces"><li>Interfaces</li></a>
   <a href="#estrutura-do-projeto"><li>Estrutura do projeto</li></a>
   <a href="#deployment-"><li>Configuração de Desenvolvimento</li></a>
-  <a href="#como-rodar"><li>Como rodar</li></a>
 </ul>
 
 ### Descrição
@@ -22,8 +21,8 @@ Modo Desktop 💻
 
 
 
+<video src="https://github.com/jefersonmarciano/Menu/assets/44215511/52e58197-55e2-4b9a-a317-0ab91d70834f" width="700"></video>
 
-https://github.com/jefersonmarciano/Menu/assets/44215511/52e58197-55e2-4b9a-a317-0ab91d70834f
 
 
 
