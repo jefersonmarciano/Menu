@@ -51,11 +51,11 @@ Modo Mobile 📲
 
 Funcionalidade via JavaScript para validação e otimização. Utilizando conceitos como Componentes, Renderização Condicional, Desestruturação, Arrow Function, Function Expression e Condicionais. 
 
-
+![motrando](https://github.com/jefersonmarciano/Menu/assets/44215511/576178eb-5464-4083-848b-7cd437fc173c)
 
 <hr>
 
 ## Deployment ☁
 
 Deploy realizado pela plataforma Vercel. Clique no botão abaixo e acesse o projeto.
-[![portfolio](https://img.shields.io/badge/-CLIQUE%20AQUI-yellowgreen)](https://weather-duo.vercel.app)
+[![portfolio](https://img.shields.io/badge/-CLIQUE%20AQUI-yellowgreen)](https://menu-beta-dusky.vercel.app/)
